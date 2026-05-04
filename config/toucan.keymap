@@ -1,6 +1,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/mouse.h>
 
 / {
     behaviors {
@@ -45,10 +46,11 @@
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
         // │SHFT │ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ ESC  │
         // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴──────┘
-        //               │BSP│NAV│GUI│   │GUI│SYS│YAB│
+        //               │BSP│NAV│GUI│   │GUI│SYS│WIN│
         //               │   │   │/SP│   │/SP│   │/ALT│
         //               └───┴───┴───┘   └───┴───┴───┘
         default_layer {
+            display-name = "BASE";
             bindings = <
                 &kp TAB       &kp Q        &kp W        &kp E        &kp R        &kp T   &kp Y  &kp U        &kp I        &kp O        &kp P           &kp BSPC
                 &mt LCTRL ESC &lhm LGUI A  &lhm LALT S  &lhm LSHFT D &lhm LCTRL F &kp G   &kp H  &rhm RCTRL J &rhm RSHFT K &rhm RALT L  &rhm RGUI SEMI  &kp SQT
@@ -68,6 +70,7 @@
         //               │   │▓▓▓│   │   │   │ADJ│   │
         //               └───┴───┴───┘   └───┴───┴───┘
         nav_layer {
+            display-name = "NAV";
             bindings = <
                 &trans     &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &trans
                 &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
@@ -89,6 +92,7 @@
         //               │   │ADJ│   │   │RET│▓▓▓│   │
         //               └───┴───┴───┘   └───┴───┴───┘
         sys_layer {
+            display-name = "SYM";
             bindings = <
                 &kp GRAVE &kp EXCL &kp AT   &kp HASH  &kp DLLR  &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp DEL
                 &trans    &trans   &trans   &trans    &trans    &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
@@ -109,6 +113,7 @@
         //                 │    │▓▓▓ │    │   │    │▓▓▓ │    │
         //                 └────┴────┴────┘   └────┴────┴────┘
         adj_layer {
+            display-name = "ADJ";
             bindings = <
                 &trans &kp F1  &kp F2  &kp F3  &kp F4  &kp F5    &kp F6       &kp F7       &kp F8     &kp F9       &kp F10      &trans
                 &trans &kp F11 &kp F12 &trans  &trans  &trans    &trans       &trans       &trans     &trans       &trans       &trans
@@ -116,25 +121,27 @@
                                        &trans  &trans  &trans    &trans       &trans       &trans
             >;
         };
-        // Layer 4: Yabai — hold right outer thumb (tap = ALT / Hyper via Karabiner)
-        // Spaces on top row, focus on right hjkl, window ops on F/C/M
+        // Layer 4: Window — hold right outer thumb (tap = ALT)
+        // Left hand: spaces + focus + swap. Right hand: mouse clicks.
         //
         // ┌─────┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬──────┐
-        // │     │SP1│SP2│SP3│SP4│SP5│   │SP6│SP7│SP8│SP9│   │      │
+        // │ A↹  │SP1│SP2│SP3│SP4│SP5│   │SP6│SP7│SP8│SP9│   │      │
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
-        // │     │   │   │   │FLT│   │   │ ← │ ↓ │ ↑ │ → │   │      │
+        // │     │ ← │ ↓ │ ↑ │ → │   │   │MB1│MB2│   │   │   │      │
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
-        // │     │   │   │CTR│   │   │   │   │ZOM│   │   │   │      │
+        // │     │⇐  │⇓  │⇑  │⇒  │   │   │   │   │   │   │   │      │
         // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴──────┘
         //               │   │   │   │   │   │   │▓▓▓│
         //               └───┴───┴───┘   └───┴───┴───┘
-        // + hold D (LSHFT) for:  swap direction / move window to space+follow
+        // A↹ = Opt+Tab (AltTab). Home: A=focus←  S=↓  D=↑  F=→
+        // Bot: Z=swap←  X=↓  C=↑  V=→    Right: H=LClick  J=RClick
         yabai_layer {
+            display-name = "WIN";
             bindings = <
-                &trans  &kp LA(N1) &kp LA(N2) &kp LA(N3) &kp LA(N4) &kp LA(N5)   &kp LA(N6) &kp LA(N7) &kp LA(N8) &kp LA(N9) &trans     &trans
-                &trans  &trans     &trans     &trans     &kp LA(T)  &trans       &kp LA(H)  &kp LA(J)  &kp LA(K)  &kp LA(L)  &trans     &trans
-                &trans  &trans     &trans     &kp LA(C)  &trans     &trans       &trans     &kp LA(M)  &trans     &trans     &trans     &trans
-                                              &trans     &trans     &trans       &trans     &trans     &trans
+                &kp LA(TAB)    &kp LA(N1)    &kp LA(N2)    &kp LA(N3)    &kp LA(N4)    &kp LA(N5)    &kp LA(N6) &kp LA(N7) &kp LA(N8) &kp LA(N9) &trans &trans
+                &trans         &kp LA(H)     &kp LA(J)     &kp LA(K)     &kp LA(L)     &trans        &mkp MB1   &mkp MB2   &trans     &trans     &trans &trans
+                &trans         &kp LA(LS(H)) &kp LA(LS(J)) &kp LA(LS(K)) &kp LA(LS(L)) &trans        &trans     &trans     &trans     &trans     &trans &trans
+                                                            &trans        &trans        &trans        &trans     &trans     &trans
             >;
         };
     };
