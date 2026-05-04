@@ -70,23 +70,26 @@
         };
 
         // Layer 1: NAV — hold left middle thumb
+        // Left home row is transparent — base layer mods pass through.
+        // e.g. NAV + hold CTRL/ESC + L = Ctrl+Right (next macOS space)
         // ┌─────┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬────┬────┬─────┐
         // │     │ 1 │ 2 │ 3 │ 4 │ 5 │   │ 6 │ 7 │ 8 │  9 │  0 │     │
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼────┼────┼─────┤
-        // │BTCLR│BT0│BT1│BT2│BT3│BT4│   │ ← │ ↓ │ ↑ │  → │    │     │
+        // │     │GUI│ALT│SHF│CTL│   │   │ ← │ ↓ │ ↑ │  → │    │     │
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼────┼────┼─────┤
         // │     │   │   │   │   │   │   │TX1│TX2│TX3│TX4 │TX5 │     │
         // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼────┴────┴─────┘
         //               │   │▓▓▓│   │   │   │ADJ│   │
         //               └───┴───┴───┘   └───┴───┴───┘
         // TX1-5 = tmux Ctrl+A+1 through Ctrl+A+5 (single keypress)
+        // BT controls moved to ADJ layer (NAV+SYS) to prevent accidental clear
         nav_layer {
             display-name = "NAV";
             bindings = <
-                &trans     &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8   &kp N9    &kp N0   &trans
-                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP   &kp RIGHT &trans   &trans
-                &trans     &trans       &trans       &trans       &trans       &trans         &tmux_1  &tmux_2  &tmux_3  &tmux_4   &tmux_5  &trans
-                                                     &trans       &trans       &trans         &trans   &mo 3    &trans
+                &trans &kp N1 &kp N2 &kp N3 &kp N4 &kp N5   &kp N6   &kp N7   &kp N8   &kp N9    &kp N0   &trans
+                &trans &trans &trans &trans &trans &trans   &kp LEFT &kp DOWN &kp UP   &kp RIGHT &trans   &trans
+                &trans &trans &trans &trans &trans &trans   &tmux_1  &tmux_2  &tmux_3  &tmux_4   &tmux_5  &trans
+                                     &trans &trans &trans   &trans   &mo 3    &trans
             >;
         };
 
@@ -113,11 +116,11 @@
         };
 
         // Layer 3: ADJ — hold both NAV + SYS at the same time
-        // F-keys, media controls, and display brightness
+        // F-keys, media controls, brightness. BT controls here (safe — needs both thumbs).
         // ┌─────┬────┬────┬────┬────┬────┐   ┌────┬────┬────┬────┬─────┬─────┐
         // │     │ F1 │ F2 │ F3 │ F4 │ F5 │   │ F6 │ F7 │ F8 │ F9 │ F10 │     │
         // ├─────┼────┼────┼────┼────┼────┤   ├────┼────┼────┼────┼─────┼─────┤
-        // │     │F11 │F12 │    │    │    │   │    │    │    │    │     │     │
+        // │BTCLR│BT0 │BT1 │BT2 │BT3 │BT4 │   │    │    │    │    │     │     │
         // ├─────┼────┼────┼────┼────┼────┤   ├────┼────┼────┼────┼─────┼─────┤
         // │     │    │    │    │    │    │   │BRI-│VOL-│MUTE│VOL+│ BRI+│     │
         // └─────┴────┴────┼────┼────┼────┤   ├────┼────┼────┼────┴─────┴─────┘
@@ -126,10 +129,10 @@
         adj_layer {
             display-name = "ADJ";
             bindings = <
-                &trans &kp F1  &kp F2  &kp F3  &kp F4  &kp F5    &kp F6       &kp F7       &kp F8     &kp F9       &kp F10      &trans
-                &trans &kp F11 &kp F12 &trans  &trans  &trans    &trans       &trans       &trans     &trans       &trans       &trans
-                &trans &trans  &trans  &trans  &trans  &trans    &kp C_BRI_DN &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &kp C_BRI_UP &trans
-                                       &trans  &trans  &trans    &trans       &trans       &trans
+                &trans     &kp F1       &kp F2       &kp F3       &kp F4       &kp F5    &kp F6       &kp F7       &kp F8     &kp F9       &kp F10      &trans
+                &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4    &trans       &trans       &trans     &trans       &trans       &trans
+                &trans     &trans       &trans       &trans       &trans       &trans    &kp C_BRI_DN &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &kp C_BRI_UP &trans
+                                                     &trans       &trans       &trans    &trans       &trans       &trans
             >;
         };
         // Layer 4: Window — hold right outer thumb (tap = ALT)
