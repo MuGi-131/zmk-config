@@ -7,11 +7,11 @@
     macros {
         // Send Ctrl+SP (tmux prefix) then a window number in one keypress
         // Usage in NAV layer: hold NAV + press N/M/,/./slash = tmux window 1-5
-        tmux_1: tmux_1 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SP) &kp N1>; };
-        tmux_2: tmux_2 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SP) &kp N2>; };
-        tmux_3: tmux_3 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SP) &kp N3>; };
-        tmux_4: tmux_4 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SP) &kp N4>; };
-        tmux_5: tmux_5 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SP) &kp N5>; };
+        tmux_1: tmux_1 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp N1>; };
+        tmux_2: tmux_2 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp N2>; };
+        tmux_3: tmux_3 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp N3>; };
+        tmux_4: tmux_4 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp N4>; };
+        tmux_5: tmux_5 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp N5>; };
     };
 
     behaviors {
