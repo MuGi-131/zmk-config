@@ -45,15 +45,15 @@
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
         // │SHFT │ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ ESC  │
         // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴──────┘
-        //               │BSP│NAV│GUI│   │GUI│SYS│ALT│
-        //               │   │   │/SP│   │/SP│   │   │
+        //               │BSP│NAV│GUI│   │GUI│SYS│YAB│
+        //               │   │   │/SP│   │/SP│   │/ALT│
         //               └───┴───┴───┘   └───┴───┴───┘
         default_layer {
             bindings = <
                 &kp TAB       &kp Q        &kp W        &kp E        &kp R        &kp T   &kp Y  &kp U        &kp I        &kp O        &kp P           &kp BSPC
                 &mt LCTRL ESC &lhm LGUI A  &lhm LALT S  &lhm LSHFT D &lhm LCTRL F &kp G   &kp H  &rhm RCTRL J &rhm RSHFT K &rhm RALT L  &rhm RGUI SEMI  &kp SQT
                 &kp LSHFT     &kp Z        &kp X        &kp C        &kp V        &kp B   &kp N  &kp M        &kp COMMA    &kp DOT      &kp FSLH        &kp RET
-                                                        &kp BSPC     &mo 1        &mt LGUI SPACE   &mt RGUI SPACE  &mo 2  &kp RALT
+                                                        &kp BSPC     &mo 1        &mt LGUI SPACE   &mt RGUI SPACE  &mo 2  &lt 4 RALT
             >;
         };
 
@@ -114,6 +114,27 @@
                 &trans &kp F11 &kp F12 &trans  &trans  &trans    &trans       &trans       &trans     &trans       &trans       &trans
                 &trans &trans  &trans  &trans  &trans  &trans    &kp C_BRI_DN &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &kp C_BRI_UP &trans
                                        &trans  &trans  &trans    &trans       &trans       &trans
+            >;
+        };
+        // Layer 4: Yabai — hold right outer thumb (tap = ALT / Hyper via Karabiner)
+        // Spaces on top row, focus on right hjkl, window ops on F/C/M
+        //
+        // ┌─────┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬──────┐
+        // │     │SP1│SP2│SP3│SP4│SP5│   │SP6│SP7│SP8│SP9│   │      │
+        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
+        // │     │   │   │   │FLT│   │   │ ← │ ↓ │ ↑ │ → │   │      │
+        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
+        // │     │   │   │CTR│   │   │   │   │ZOM│   │   │   │      │
+        // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴──────┘
+        //               │   │   │   │   │   │   │▓▓▓│
+        //               └───┴───┴───┘   └───┴───┴───┘
+        // + hold D (LSHFT) for:  swap direction / move window to space+follow
+        yabai_layer {
+            bindings = <
+                &trans  &kp LA(N1) &kp LA(N2) &kp LA(N3) &kp LA(N4) &kp LA(N5)   &kp LA(N6) &kp LA(N7) &kp LA(N8) &kp LA(N9) &trans     &trans
+                &trans  &trans     &trans     &trans     &kp LA(T)  &trans       &kp LA(H)  &kp LA(J)  &kp LA(K)  &kp LA(L)  &trans     &trans
+                &trans  &trans     &trans     &kp LA(C)  &trans     &trans       &trans     &kp LA(M)  &trans     &trans     &trans     &trans
+                                              &trans     &trans     &trans       &trans     &trans     &trans
             >;
         };
     };
