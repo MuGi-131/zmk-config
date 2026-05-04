@@ -54,18 +54,18 @@
         // │ESC/ │GUI│ALT│SHF│CTL│ G │   │ H │CTL│SHF│ALT│GUI│  '   │
         // │CTRL │ a │ s │ d │ f │   │   │   │ j │ k │ l │ ; │      │
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
-        // │SHFT │ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │  │
+        // │SHFT │ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ RET │
         // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴──────┘
-        //               │BSP│NAV│GUI│   │GUI│SYS│WIN│
-        //               │   │   │/SP│   │/SP│   │   │
+        //               │APP│NAV│GUI│   │GUI│SYS│WIN│
+        //               │/BS│   │/SP│   │/SP│   │   │
         //               └───┴───┴───┘   └───┴───┴───┘
         default_layer {
             display-name = "BASE";
             bindings = <
                 &kp TAB       &kp Q        &kp W        &kp E        &kp R        &kp T   &kp Y  &kp U        &kp I        &kp O        &kp P           &kp BSPC
                 &mt LCTRL ESC &lhm LGUI A  &lhm LALT S  &lhm LSHFT D &lhm LCTRL F &kp G   &kp H  &rhm RCTRL J &rhm RSHFT K &rhm RALT L  &rhm RGUI SEMI  &kp SQT
-                &kp LSHFT     &kp Z        &kp X        &kp C        &kp V        &kp B   &kp N  &kp M        &kp COMMA    &kp DOT      &kp FSLH        &kp RET
-                                                        &kp BSPC     &mo 1        &mt LGUI SPACE   &mt RGUI SPACE  &mo 2  &mo 4
+                &kp LSHFT     &kp Z        &kp X        &kp C        &kp V        &kp B   &kp N  &kp M        &kp COMMA    &kp DOT      &kp FSLH        &mt LSHFT RET
+                                                        &lt 5 BSPC   &mo 1        &mt LGUI SPACE   &mt RGUI SPACE  &mo 2  &mo 4
             >;
         };
 
@@ -96,22 +96,22 @@
         // Layer 2: SYS — hold right middle thumb
         // Right inner thumb (GUI/SP position) = RET in this layer
         // (hold SYS + tap right inner = Return — one-thumb combo)
-        // ┌─────┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬─────┐
-        // │  `  │ ! │ @ │ # │ $ │ % │   │ ^ │ & │ * │ ( │ ) │ DEL │
-        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼─────┤
-        // │     │   │   │   │   │   │   │ - │ = │ [ │ ] │ \ │  `  │
-        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼─────┤
-        // │     │   │   │   │   │   │   │ _ │ + │ { │ } │ | │  ~  │
-        // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴─────┘
-        //               │   │ADJ│   │   │RET│▓▓▓│   │
-        //               └───┴───┴───┘   └───┴───┴───┘
+        // ┌─────┬────┬───┬────┬─────┬───┐   ┌───┬───┬───┬───┬───┬─────┐
+        // │  `  │ !  │ @ │ #  │  $  │ % │   │ ^ │ & │ * │ ( │ ) │ DEL │
+        // ├─────┼────┼───┼────┼─────┼───┤   ├───┼───┼───┼───┼───┼─────┤
+        // │     │ ◁◁ │ ▶ │ ▷▷ │MUTE │   │   │ - │ = │ [ │ ] │ \ │  `  │
+        // ├─────┼────┼───┼────┼─────┼───┤   ├───┼───┼───┼───┼───┼─────┤
+        // │     │VOL-│   │VOL+│     │   │   │ _ │ + │ { │ } │ | │  ~  │
+        // └─────┴────┴───┼────┼─────┼───┤   ├───┼───┼───┼───┴───┴─────┘
+        //                │    │ ADJ │   │   │RET│▓▓▓│   │
+        //                └────┴─────┴───┘   └───┴───┴───┘
         sys_layer {
             display-name = "SYM";
             bindings = <
-                &kp GRAVE &kp EXCL &kp AT   &kp HASH  &kp DLLR  &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp DEL
-                &trans    &trans   &trans   &trans    &trans    &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
-                &trans    &trans   &trans   &trans    &trans    &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
-                                            &trans    &mo 3     &trans      &kp RET   &trans    &trans
+                &kp GRAVE &kp EXCL     &kp AT   &kp HASH     &kp DLLR   &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp DEL
+                &trans    &kp C_PREV   &kp C_PP &kp C_NEXT   &kp C_MUTE &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
+                &trans    &kp C_VOL_DN &trans   &kp C_VOL_UP &trans     &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
+                                                &trans        &mo 3      &trans      &kp RET   &trans    &trans
             >;
         };
 
@@ -156,6 +156,35 @@
                 &trans         &kp LA(H)     &kp LA(J)     &kp LA(K)     &kp LA(L)     &trans        &mkp MB1   &mkp MB2   &trans     &trans     &trans &trans
                 &trans         &kp LA(LS(H)) &kp LA(LS(J)) &kp LA(LS(K)) &kp LA(LS(L)) &trans        &trans     &trans     &trans     &trans     &trans &trans
                                                             &trans        &trans        &trans        &trans     &trans     &trans
+            >;
+        };
+        // Layer 5: LAUNCH — hold left outer thumb (tap = BSPC)
+        // Right hand only — left thumb is busy holding the layer key.
+        // Every key sends Hyper+letter (Cmd+Ctrl+Opt+Shift+key).
+        // Wire up in skhd:
+        //   hyper - h : open -a Finder
+        //   hyper - j : open -a Alacritty   # your terminal
+        //   hyper - k : open -a Slack
+        //   hyper - l : open -a "Google Chrome"
+        //   hyper - o : open -a Obsidian
+        //   hyper - m : open -a Mail
+        //
+        // ┌─────┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬──────┐
+        // │     │   │   │   │   │   │   │   │   │   │OBS│   │      │
+        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
+        // │     │   │   │   │   │   │   │FDR│TRM│SLK│BRW│   │      │
+        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
+        // │     │   │   │   │   │   │   │   │MAL│   │   │   │      │
+        // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴──────┘
+        //               │▓▓▓│   │   │   │   │   │   │
+        //               └───┴───┴───┘   └───┴───┴───┘
+        launch_layer {
+            display-name = "APP";
+            bindings = <
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans                    &trans                    &trans                    &kp LA(LS(LC(LG(O))))   &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &kp LA(LS(LC(LG(H))))     &kp LA(LS(LC(LG(J))))     &kp LA(LS(LC(LG(K))))     &kp LA(LS(LC(LG(L))))   &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans                    &kp LA(LS(LC(LG(M))))     &trans                    &trans                  &trans  &trans
+                                        &trans  &trans  &trans    &trans                    &trans                    &trans
             >;
         };
     };
