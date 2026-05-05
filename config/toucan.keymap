@@ -54,7 +54,7 @@
         // │ESC/ │GUI│ALT│SHF│CTL│ G │   │ H │CTL│SHF│ALT│GUI│  '   │
         // │CTRL │ a │ s │ d │ f │   │   │   │ j │ k │ l │ ; │      │
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
-        // │SHFT │ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ RET │
+        // │SHFT │ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ RET  │
         // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴──────┘
         //               │APP│NAV│GUI│   │GUI│SYS│WIN│
         //               │/BS│   │/SP│   │/SP│   │   │
@@ -70,48 +70,47 @@
         };
 
         // Layer 1: NAV — hold left middle thumb
-        // Left home row is transparent — base layer mods pass through.
-        // e.g. NAV + hold CTRL/ESC + L = Ctrl+Right (next macOS space)
-        // ┌─────┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬────┬────┬─────┐
-        // │     │ 1 │ 2 │ 3 │ 4 │ 5 │   │ 6 │ 7 │ 8 │  9 │  0 │     │
-        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼────┼────┼─────┤
-        // │     │GUI│ALT│SHF│CTL│   │   │ ← │ ↓ │ ↑ │  → │    │     │
-        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼────┼────┼─────┤
-        // │     │   │   │   │   │   │   │TX1│TX2│TX3│TX4 │TX5 │     │
-        // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼────┴────┴─────┘
-        //               │   │▓▓▓│   │   │   │ADJ│   │
-        //               └───┴───┴───┘   └───┴───┴───┘
-        // TX1-5 = tmux Ctrl+A+1 through Ctrl+A+5 (single keypress)
-        // BT controls moved to ADJ layer (NAV+SYS) to prevent accidental clear
+        // ┌─────┬───┬───┬───┬───┬───┐   ┌───┬────┬───┬───┬───┬─────┐
+        // │     │ 1 │ 2 │ 3 │ 4 │ 5 │   │ 6 │PGU │ 8 │ 9 │ 0 │ DEL │
+        // ├─────┼───┼───┼───┼───┼───┤   ├───┼────┼───┼───┼───┼─────┤
+        // │     │GUI│ALT│PGD│CTL│   │   │ ← │ ↓  │ ↑ │ → │HOM│ END │
+        // ├─────┼───┼───┼───┼───┼───┤   ├───┼────┼───┼───┼───┼─────┤
+        // │     │   │   │   │   │   │   │TX1│TX2 │TX3│TX4│TX5│     │
+        // └─────┴───┴───┼───┼───┼───┤   ├───┼────┼───┼───┴───┴─────┘
+        //               │   │▓▓▓│   │   │   │ADJ │   │
+        //               └───┴───┴───┘   └───┴────┴───┘
+        // PGU/PGD = Page Up/Down. HOM/END = Home/End. DEL = forward delete.
+        // TX1-5 = tmux Ctrl+Space+1–5 (window switch, single keypress)
+        // BT controls in ADJ layer (NAV+SYS) to prevent accidental clear
         nav_layer {
             display-name = "NAV";
             bindings = <
-                &trans &kp N1 &kp N2 &kp N3 &kp N4 &kp N5   &kp N6   &kp N7   &kp N8   &kp N9    &kp N0   &trans
-                &trans &trans &trans &trans &trans &trans   &kp LEFT &kp DOWN &kp UP   &kp RIGHT &trans   &trans
-                &trans &trans &trans &trans &trans &trans   &tmux_1  &tmux_2  &tmux_3  &tmux_4   &tmux_5  &trans
-                                     &trans &trans &trans   &trans   &mo 3    &trans
+                &trans &kp N1 &kp N2 &kp N3    &kp N4 &kp N5   &kp N6   &kp PG_UP &kp N8   &kp N9    &kp N0   &kp DEL
+                &trans &trans &trans &kp PG_DN  &trans &trans   &kp LEFT &kp DOWN  &kp UP   &kp RIGHT &kp HOME &kp END
+                &trans &trans &trans &trans     &trans &trans   &tmux_1  &tmux_2   &tmux_3  &tmux_4   &tmux_5  &trans
+                                     &trans     &trans &trans   &trans   &mo 3     &trans
             >;
         };
 
         // Layer 2: SYS — hold right middle thumb
         // Right inner thumb (GUI/SP position) = RET in this layer
         // (hold SYS + tap right inner = Return — one-thumb combo)
-        // ┌─────┬────┬───┬────┬─────┬───┐   ┌───┬───┬───┬───┬───┬─────┐
-        // │  `  │ !  │ @ │ #  │  $  │ % │   │ ^ │ & │ * │ ( │ ) │ DEL │
-        // ├─────┼────┼───┼────┼─────┼───┤   ├───┼───┼───┼───┼───┼─────┤
-        // │     │ ◁◁ │ ▶ │ ▷▷ │MUTE │   │   │ - │ = │ [ │ ] │ \ │  `  │
-        // ├─────┼────┼───┼────┼─────┼───┤   ├───┼───┼───┼───┼───┼─────┤
-        // │     │VOL-│   │VOL+│     │   │   │ _ │ + │ { │ } │ | │  ~  │
-        // └─────┴────┴───┼────┼─────┼───┤   ├───┼───┼───┼───┴───┴─────┘
-        //                │    │ ADJ │   │   │RET│▓▓▓│   │
-        //                └────┴─────┴───┘   └───┴───┴───┘
+        // ┌─────┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬─────┐
+        // │  `  │ ! │ @ │ # │ $ │ % │   │ ^ │ & │ * │ ( │ ) │ DEL │
+        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼─────┤
+        // │     │   │   │   │   │   │   │ - │ = │ [ │ ] │ \ │  `  │
+        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼─────┤
+        // │     │   │   │   │   │   │   │ _ │ + │ { │ } │ | │  ~  │
+        // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴─────┘
+        //               │   │ADJ│   │   │RET│▓▓▓│   │
+        //               └───┴───┴───┘   └───┴───┴───┘
         sys_layer {
             display-name = "SYM";
             bindings = <
-                &kp GRAVE &kp EXCL     &kp AT   &kp HASH     &kp DLLR   &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp DEL
-                &trans    &kp C_PREV   &kp C_PP &kp C_NEXT   &kp C_MUTE &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
-                &trans    &kp C_VOL_DN &trans   &kp C_VOL_UP &trans     &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
-                                                &trans        &mo 3      &trans      &kp RET   &trans    &trans
+                &kp GRAVE &kp EXCL &kp AT   &kp HASH  &kp DLLR  &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp DEL
+                &trans    &trans   &trans   &trans    &trans    &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
+                &trans    &trans   &trans   &trans    &trans    &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
+                                            &trans    &mo 3     &trans      &kp RET   &trans    &trans
             >;
         };
 
