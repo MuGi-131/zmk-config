@@ -7,11 +7,26 @@
     macros {
         // Send Ctrl+SP (tmux prefix) then a window number in one keypress
         // Usage in NAV layer: hold NAV + press N/M/,/./slash = tmux window 1-5
+        // Window switching: NAV + N/M/,/./slash
         tmux_1: tmux_1 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp N1>; };
         tmux_2: tmux_2 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp N2>; };
         tmux_3: tmux_3 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp N3>; };
         tmux_4: tmux_4 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp N4>; };
         tmux_5: tmux_5 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp N5>; };
+        // Pane/window management: NAV + Z/X/C
+        tmux_sph: tmux_sph { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp PRCNT>; };
+        tmux_spv: tmux_spv { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp DQT>; };
+        tmux_nw:  tmux_nw  { compatible = "zmk,behavior-macro"; #binding-cells = <0>; wait-ms = <50>; tap-ms = <10>; bindings = <&macro_tap &kp LC(SPACE) &kp C>; };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+        // Z + / simultaneously = caps_word (for TYPING_CONSTANTS)
+        combo_caps_word {
+            timeout-ms = <50>;
+            key-positions = <25 34>;
+            bindings = <&caps_word>;
+        };
     };
 
     behaviors {
@@ -75,20 +90,20 @@
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼────┼───┼───┼───┼─────┤
         // │     │GUI│ALT│PGD│CTL│   │   │ ← │ ↓  │ ↑ │ → │HOM│ END │
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼────┼───┼───┼───┼─────┤
-        // │     │   │   │   │   │   │   │TX1│TX2 │TX3│TX4│TX5│     │
+        // │     │SPH│SPV│ NW│   │   │   │TX1│TX2 │TX3│TX4│TX5│     │
         // └─────┴───┴───┼───┼───┼───┤   ├───┼────┼───┼───┴───┴─────┘
         //               │   │▓▓▓│   │   │   │ADJ │   │
         //               └───┴───┴───┘   └───┴────┴───┘
-        // PGU/PGD = Page Up/Down. HOM/END = Home/End. DEL = forward delete.
-        // TX1-5 = tmux Ctrl+Space+1–5 (window switch, single keypress)
-        // BT controls in ADJ layer (NAV+SYS) to prevent accidental clear
+        // SPH = tmux split horizontal (%)   SPV = split vertical (")   NW = new window
+        // TX1-5 = tmux window 1–5 (Ctrl+Space+N)
+        // caps_word = Z + / simultaneously (for TYPING_CONSTANTS)
         nav_layer {
             display-name = "NAV";
             bindings = <
-                &trans &kp N1 &kp N2 &kp N3    &kp N4 &kp N5   &kp N6   &kp PG_UP &kp N8   &kp N9    &kp N0   &kp DEL
-                &trans &trans &trans &kp PG_DN  &trans &trans   &kp LEFT &kp DOWN  &kp UP   &kp RIGHT &kp HOME &kp END
-                &trans &trans &trans &trans     &trans &trans   &tmux_1  &tmux_2   &tmux_3  &tmux_4   &tmux_5  &trans
-                                     &trans     &trans &trans   &trans   &mo 3     &trans
+                &trans &kp N1    &kp N2    &kp N3    &kp N4 &kp N5   &kp N6   &kp PG_UP &kp N8   &kp N9    &kp N0   &kp DEL
+                &trans &trans    &trans    &kp PG_DN &trans &trans   &kp LEFT &kp DOWN  &kp UP   &kp RIGHT &kp HOME &kp END
+                &trans &tmux_sph &tmux_spv &tmux_nw  &trans &trans   &tmux_1  &tmux_2   &tmux_3  &tmux_4   &tmux_5  &trans
+                                           &trans    &trans &trans   &trans   &mo 3     &trans
             >;
         };
 
