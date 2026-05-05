@@ -1,6 +1,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/mouse.h>
 
 / {
     macros {
@@ -162,23 +163,23 @@
                                                      &trans       &trans       &trans    &trans       &trans       &trans
             >;
         };
-        // Layer 4: VIMNAV — hold right outer thumb (shift+thumb = RET)
-        // Right home row = vim arrows. Hold SHIFT while in layer = text selection.
+        // Layer 4: CTRL — hold right outer thumb (shift+thumb = RET)
+        // Right home row = vim arrows. N=MB1  M=MB2.
         // ┌─────┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬──────┐
         // │     │   │   │   │   │   │   │   │   │   │   │   │      │
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
         // │     │   │   │   │   │   │   │ ← │ ↓ │ ↑ │ → │   │      │
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
-        // │     │   │   │   │   │   │   │   │   │   │   │   │      │
+        // │     │   │   │   │   │   │   │MB1│MB2│   │   │   │      │
         // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴──────┘
         //               │   │   │   │   │   │   │▓▓▓│
         //               └───┴───┴───┘   └───┴───┴───┘
         vimnav_layer {
-            display-name = "VIM";
+            display-name = "CTRL";
             bindings = <
                 &trans &trans &trans &trans &trans &trans   &trans   &trans   &trans &trans    &trans &trans
                 &trans &trans &trans &trans &trans &trans   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-                &trans &trans &trans &trans &trans &trans   &trans   &trans   &trans &trans    &trans &trans
+                &trans &trans &trans &trans &trans &trans   &mkp MB1 &mkp MB2 &trans &trans    &trans &trans
                                      &trans &trans &trans   &trans   &trans   &trans
             >;
         };
