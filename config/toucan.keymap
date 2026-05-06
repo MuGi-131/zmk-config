@@ -87,7 +87,7 @@
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
         // │SHFT │ Z │ X │ C │ V │ B │   │ N │ M │ , │ . │ / │ RET  │
         // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴──────┘
-        //               │APP│NAV│GUI│   │GUI│SYS│VIM│
+        //               │APP│NAV│WSP│   │GUI│SYS│VIM│
         //               │/BS│   │/SP│   │/SP│   │/RET│
         //               └───┴───┴───┘   └───┴───┴───┘
         default_layer {
@@ -96,7 +96,7 @@
                 &kp TAB       &kp Q        &kp W        &kp E        &kp R        &kp T   &kp Y  &kp U        &kp I        &kp O        &kp P           &kp BSPC
                 &mt LCTRL ESC &lhm LGUI A  &lhm LALT S  &lhm LSHFT D &lhm LCTRL F &kp G   &kp H  &rhm RCTRL J &rhm RSHFT K &rhm RALT L  &rhm RGUI SEMI  &kp SQT
                 &kp LSHFT     &kp Z        &kp X        &kp C        &kp V        &kp B   &kp N  &kp M        &kp COMMA    &kp DOT      &kp FSLH        &mt LSHFT RET
-                                                        &lt 5 BSPC   &mo 1        &mt LGUI SPACE   &kp SPACE  &mo 2  &nav_morph
+                                                        &lt 5 BSPC   &mo 1        &lt 6 SPACE   &kp SPACE  &mo 2  &nav_morph
             >;
         };
 
@@ -116,7 +116,7 @@
         nav_layer {
             display-name = "NAV";
             bindings = <
-                &trans &kp N1    &kp N2    &kp N3    &kp N4 &kp N5   &kp N6   &kp PG_UP &kp N8   &kp N9    &kp N0   &kp DEL
+                &trans &kp N1    &kp N2    &kp N3    &kp N4 &kp N5   &kp N6   &kp PG_UP &kp N8   &kp N9    &kp N0   &trans
                 &trans &trans    &trans    &kp PG_DN &trans &trans   &kp LEFT &kp DOWN  &kp UP   &kp RIGHT &kp HOME &kp END
                 &trans &tmux_sph &tmux_spv &tmux_nw  &trans &trans   &tmux_1  &tmux_2   &tmux_3  &tmux_4   &tmux_5  &trans
                                            &trans    &trans &trans   &trans   &mo 3     &trans
@@ -166,24 +166,23 @@
             >;
         };
         // Layer 4: CTRL — hold right outer thumb (shift+thumb = RET)
-        // Top row Q-P: GUI+1 through GUI+0 → yabai workspace switching
         // Right home row = vim arrows. N=MB1  M=MB2.
-        // ┌─────┬────┬────┬────┬────┬────┐   ┌────┬────┬────┬────┬────┬──────┐
-        // │     │G+1 │G+2 │G+3 │G+4 │G+5 │   │G+6 │G+7 │G+8 │G+9 │G+0 │      │
-        // ├─────┼────┼────┼────┼────┼────┤   ├────┼────┼────┼────┼────┼──────┤
-        // │     │    │    │    │    │    │   │ ←  │ ↓  │ ↑  │ →  │    │      │
-        // ├─────┼────┼────┼────┼────┼────┤   ├────┼────┼────┼────┼────┼──────┤
-        // │     │    │    │    │    │    │   │MB1 │MB2 │    │    │    │      │
-        // └─────┴────┴────┼────┼────┼────┤   ├────┼────┼────┼────┴────┴──────┘
-        //                 │    │    │    │   │    │    │▓▓▓ │
-        //                 └────┴────┴────┘   └────┴────┴────┘
+        // ┌─────┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬──────┐
+        // │     │   │   │   │   │   │   │   │   │   │   │   │      │
+        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
+        // │     │   │   │   │   │   │   │ ← │ ↓ │ ↑ │ → │   │      │
+        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
+        // │     │   │   │   │   │   │   │MB1│MB2│   │   │   │      │
+        // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴──────┘
+        //               │   │   │   │   │   │   │▓▓▓│
+        //               └───┴───┴───┘   └───┴───┴───┘
         vimnav_layer {
             display-name = "CTRL";
             bindings = <
-                &trans &kp LG(N1) &kp LG(N2) &kp LG(N3) &kp LG(N4) &kp LG(N5)   &kp LG(N6) &kp LG(N7) &kp LG(N8) &kp LG(N9) &kp LG(N0) &trans
-                &trans &trans     &trans     &trans     &trans     &trans        &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &trans     &trans
-                &trans &trans     &trans     &trans     &trans     &trans        &mkp MB1   &mkp MB2   &trans     &trans     &trans     &trans
-                                             &trans     &trans     &trans        &trans     &trans     &trans
+                &trans &trans &trans &trans &trans &trans   &trans   &trans   &trans &trans    &trans &trans
+                &trans &trans &trans &trans &trans &trans   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
+                &trans &trans &trans &trans &trans &trans   &mkp MB1 &mkp MB2 &trans &trans    &trans &trans
+                                     &trans &trans &trans   &trans   &trans   &trans
             >;
         };
         // Layer 5: LAUNCH — hold left outer thumb (tap = BSPC)
@@ -213,6 +212,26 @@
                 &trans  &trans  &trans  &trans  &trans  &trans    &kp LA(LS(LC(LG(H))))     &kp LA(LS(LC(LG(J))))     &kp LA(LS(LC(LG(K))))     &kp LA(LS(LC(LG(L))))   &trans  &trans
                 &trans  &trans  &trans  &trans  &trans  &trans    &trans                    &kp LA(LS(LC(LG(M))))     &trans                    &trans                  &trans  &trans
                                         &trans  &trans  &trans    &trans                    &trans                    &trans
+            >;
+        };
+        // Layer 6: WKSP — hold left inner thumb (GUI/SP key), tap = SPACE
+        // Q-P → GUI+1 through GUI+0 for yabai workspace switching
+        // ┌─────┬────┬────┬────┬────┬────┐   ┌────┬────┬────┬────┬────┬──────┐
+        // │     │G+1 │G+2 │G+3 │G+4 │G+5 │   │G+6 │G+7 │G+8 │G+9 │G+0 │      │
+        // ├─────┼────┼────┼────┼────┼────┤   ├────┼────┼────┼────┼────┼──────┤
+        // │     │    │    │    │    │    │   │    │    │    │    │    │      │
+        // ├─────┼────┼────┼────┼────┼────┤   ├────┼────┼────┼────┼────┼──────┤
+        // │     │    │    │    │    │    │   │    │    │    │    │    │      │
+        // └─────┴────┴────┼────┼────┼────┤   ├────┼────┼────┼────┴────┴──────┘
+        //                 │    │    │▓▓▓ │   │    │    │    │
+        //                 └────┴────┴────┘   └────┴────┴────┘
+        wksp_layer {
+            display-name = "WKSP";
+            bindings = <
+                &trans &kp LG(N1) &kp LG(N2) &kp LG(N3) &kp LG(N4) &kp LG(N5)   &kp LG(N6) &kp LG(N7) &kp LG(N8) &kp LG(N9) &kp LG(N0) &trans
+                &trans &trans     &trans     &trans     &trans     &trans        &trans     &trans     &trans     &trans     &trans     &trans
+                &trans &trans     &trans     &trans     &trans     &trans        &trans     &trans     &trans     &trans     &trans     &trans
+                                             &trans     &trans     &trans        &trans     &trans     &trans
             >;
         };
     };
