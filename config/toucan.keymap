@@ -65,7 +65,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "balanced";
-            tapping-term-ms = <500>;
+            tapping-term-ms = <200>;
             quick-tap-ms = <175>;
             require-prior-idle-ms = <250>;
             bindings = <&kp>, <&kp>;
@@ -187,31 +187,31 @@
         };
         // Layer 5: LAUNCH — hold left outer thumb (tap = BSPC)
         // Right hand only — left thumb is busy holding the layer key.
-        // Every key sends Hyper+letter (Cmd+Ctrl+Opt+Shift+key).
+        // Top row (Q-P): GUI+1 through GUI+0  → yabai workspace switching
+        // Home row: Hyper+letter               → skhd app launch shortcuts
         // Wire up in skhd:
         //   hyper - h : open -a Finder
         //   hyper - j : open -a Alacritty   # your terminal
         //   hyper - k : open -a Slack
         //   hyper - l : open -a "Google Chrome"
-        //   hyper - o : open -a Obsidian
         //   hyper - m : open -a Mail
         //
-        // ┌─────┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬──────┐
-        // │     │   │   │   │   │   │   │   │   │   │OBS│   │      │
-        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
-        // │     │   │   │   │   │   │   │FDR│TRM│SLK│BRW│   │      │
-        // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
-        // │     │   │   │   │   │   │   │   │MAL│   │   │   │      │
-        // └─────┴───┴───┼───┼───┼───┤   ├───┼───┼───┼───┴───┴──────┘
-        //               │▓▓▓│   │   │   │   │   │   │
-        //               └───┴───┴───┘   └───┴───┴───┘
+        // ┌─────┬────┬────┬────┬────┬────┐   ┌────┬────┬────┬────┬────┬──────┐
+        // │     │G+1 │G+2 │G+3 │G+4 │G+5 │   │G+6 │G+7 │G+8 │G+9 │G+0 │      │
+        // ├─────┼────┼────┼────┼────┼────┤   ├────┼────┼────┼────┼────┼──────┤
+        // │     │    │    │    │    │    │   │FDR │TRM │SLK │BRW │    │      │
+        // ├─────┼────┼────┼────┼────┼────┤   ├────┼────┼────┼────┼────┼──────┤
+        // │     │    │    │    │    │    │   │    │MAL │    │    │    │      │
+        // └─────┴────┴────┼────┼────┼────┤   ├────┼────┼────┼────┴────┴──────┘
+        //                 │▓▓▓ │    │    │   │    │    │    │
+        //                 └────┴────┴────┘   └────┴────┴────┘
         launch_layer {
             display-name = "APP";
             bindings = <
-                &trans  &trans  &trans  &trans  &trans  &trans    &trans                    &trans                    &trans                    &kp LA(LS(LC(LG(O))))   &trans  &trans
-                &trans  &trans  &trans  &trans  &trans  &trans    &kp LA(LS(LC(LG(H))))     &kp LA(LS(LC(LG(J))))     &kp LA(LS(LC(LG(K))))     &kp LA(LS(LC(LG(L))))   &trans  &trans
-                &trans  &trans  &trans  &trans  &trans  &trans    &trans                    &kp LA(LS(LC(LG(M))))     &trans                    &trans                  &trans  &trans
-                                        &trans  &trans  &trans    &trans                    &trans                    &trans
+                &trans  &kp LG(N1)  &kp LG(N2)  &kp LG(N3)  &kp LG(N4)  &kp LG(N5)    &kp LG(N6)                &kp LG(N7)                &kp LG(N8)                &kp LG(N9)              &kp LG(N0)  &trans
+                &trans  &trans      &trans       &trans       &trans       &trans        &kp LA(LS(LC(LG(H))))     &kp LA(LS(LC(LG(J))))     &kp LA(LS(LC(LG(K))))     &kp LA(LS(LC(LG(L))))   &trans      &trans
+                &trans  &trans      &trans       &trans       &trans       &trans        &trans                    &kp LA(LS(LC(LG(M))))     &trans                    &trans                  &trans      &trans
+                                                 &trans       &trans       &trans        &trans                    &trans                    &trans
             >;
         };
     };
