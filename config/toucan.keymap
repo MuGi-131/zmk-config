@@ -85,16 +85,6 @@
             hold-trigger-on-release;
         };
 
-        // Auto-shift: hold to get shifted version (185ms). Applied to non-HRM keys in base layer.
-        as: auto_shift {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <185>;
-            quick-tap-ms = <0>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
-        };
-
     };
 
     keymap {
@@ -115,9 +105,9 @@
         base_layer {
             display-name = "BASE";
             bindings = <
-                &as LS(TAB) TAB &as LS(Q) Q  &as LS(W) W  &as LS(E) E  &as LS(R) R  &as LS(T) T    &as LS(Y) Y  &as LS(U) U  &as LS(I) I  &as LS(O) O  &as LS(P) P  &kp BSPC
-                &mt LCTRL ESC   &lhm LGUI A  &lhm LALT S  &lhm LSHFT D &lhm LCTRL F &as LS(G) G    &as LS(H) H  &rhm RCTRL J &rhm RSHFT K &rhm RALT L  &rhm RGUI SEMI  &as DQT SQT
-                &kp LSHFT       &as LS(Z) Z  &as LS(X) X  &as LS(C) C  &as LS(V) V  &as LS(B) B    &as LS(N) N  &as LS(M) M  &as LS(COMMA) COMMA  &as LS(DOT) DOT  &as LS(FSLH) FSLH  &mt LSHFT RET
+                &kp TAB       &kp Q        &kp W        &kp E        &kp R        &kp T          &kp Y        &kp U        &kp I        &kp O        &kp P        &kp BSPC
+                &mt LCTRL ESC   &lhm LGUI A  &lhm LALT S  &lhm LSHFT D &lhm LCTRL F &kp G          &kp H        &rhm RCTRL J &rhm RSHFT K &rhm RALT L  &rhm RGUI SEMI  &kp SQT
+                &kp LSHFT       &kp Z        &kp X        &kp C        &kp V        &kp B          &kp N        &kp M        &kp COMMA    &kp DOT      &kp FSLH     &mt LSHFT RET
                                                         &lt 5 BSPC   &mo 1        &lt 6 SPACE   &kp SPACE  &mo 2  &nav_morph
             >;
         };
