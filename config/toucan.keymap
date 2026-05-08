@@ -90,7 +90,7 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Base (QWERTY) with HRM + Auto-Shift
+        // Layer 0: Base (QWERTY) with HRM
         // ┌─────┬───┬───┬───┬───┬───┐   ┌───┬───┬───┬───┬───┬──────┐
         // │ TAB │ Q │ W │ E │ R │ T │   │ Y │ U │ I │ O │ P │ BSPC │
         // ├─────┼───┼───┼───┼───┼───┤   ├───┼───┼───┼───┼───┼──────┤
@@ -194,7 +194,7 @@
         ctrl_layer {
             display-name = "CTRL";
             bindings = <
-                &trans &trans &trans &trans &trans &trans   &trans   &trans   &trans &trans    &trans &trans
+                &trans &kp LG(N1) &kp LG(N2) &kp LG(N3) &kp LG(N4) &kp LG(N5)   &kp LG(N6) &kp LG(N7) &kp LG(N8) &kp LG(N9) &kp LG(N0) &trans
                 &trans &trans &trans &trans &trans &trans   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
                 &trans &trans &trans &trans &trans &trans   &mkp MB1 &mkp MB2 &trans &trans    &trans &trans
                                      &trans &trans &trans   &trans   &trans   &trans
@@ -243,7 +243,7 @@
         wksp_layer {
             display-name = "WKSP";
             bindings = <
-                &trans &kp LG(N1) &kp LG(N2) &kp LG(N3) &kp LG(N4) &kp LG(N5)   &kp LG(N6) &kp LG(N7) &kp LG(N8) &kp LG(N9) &kp LG(N0) &trans
+                &trans &trans     &trans     &trans     &trans     &trans        &trans     &trans     &trans     &trans     &trans     &trans
                 &trans &trans     &trans     &trans     &trans     &trans        &trans     &trans     &trans     &trans     &trans     &trans
                 &trans &trans     &trans     &trans     &trans     &trans        &trans     &trans     &trans     &trans     &trans     &trans
                                              &trans     &trans     &trans        &trans     &trans     &trans
